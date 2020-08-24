@@ -1,0 +1,32 @@
+language: android
+dist: trusty
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-29.0.2
+    - android-29
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+  licenses:
+    - android-sdk-preview-license-.+
+    - android-sdk-license-.+
+    - google-gdk-license-.+
+script:
+  - "./gradlew build --stacktrace"
+deploy:
+  provider: releases
+  skip_cleanup: true
+  overwrite: true
+  api_key:
+    secure: ZK/E8j5wMxvJoeqlm2CF6WDWp8dGi2pYocZB9C/Zz+R8xEQFAi4g1y4SM0n6jDrisx1VAudjz0YJoKoasRZSF0Zqfro/sUs+vsOw26dBxSzsZ8ImBagwGT/IyiAaSA6I61IhQDG2Ji2og44zBYbKDe3WOXbllFwTzpgfZr4zmn8bWg+gTr7qO2pLapMgqsw9fqFUa+RnNXimn6D+owpGFE2MZygIkd9rckTcxUSi8W3/c0BemJ1oHOFXuwNU5Tu9rsnDSkCaO0C5gGMvbn24qYfodWaxJmlbt8l6Kbk2Z16xnS/bog3KnCEeYrmltc5C362tpHVCkdSu64qLyBeEt/gK75Ik68fVBoOZgmuZtIzEhrNjpNUgO6pLfw9ee2gEDuV9NaX0JNyeSNbC9QbHB3FF7Js7TrdgZ+IJPmBtt0W3FoTnEHyNjqi2niKc2supXEZNuXfjqD6AjzZ6+1HxOFobo70IUedAWR/LanyeM+P57L9hzxvgLCXItsu9fx294YlePQOxFESD/adokrNUuzpUr0lFReZE1vmWF7f4M0hAN1NUHEfSu0Axs4WE3EorwSf2/VszMFhHGYKmwmixwS1bGNDogrAQQEEGuqbwBAr5IjFVGuvntUrQtNsPkcov1le2PRPBm4uC6wFcVwpnWuM+qS5e3Yr8sMH5dhkinz4=
+  file_glob: true
+  file: "/home/travis/build/kryptonpust/PUST-Contacts/app/build/outputs/apk/release/*"
+  on:
+    repo: kryptonpust/PUST-Contacts
+    tags: true
+
+before_install:
+  - openssl aes-256-cbc -K $encrypted_091a14cb7ca2_key -iv $encrypted_091a14cb7ca2_iv
+    -in privatekey.jks.enc -out privatekey.jks -d
